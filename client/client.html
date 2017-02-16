@@ -6,7 +6,71 @@
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
   <script type="text/babel">
+    var button = document.querySelector("#send");
+    var desiredPage = document.querySelector("#page");
+    var desiredType = document.querySelector('#type');
+    var httpRequest;
+    
+    //function to send an xhr request
+    const sendAjax = (url, acceptedType) => {
+      const xhr = new XMLHttpRequest();
 
+      xhr.open('GET', url);
+
+      xhr.setRequestHeader ("Accept", acceptedType);
+
+      xhr.onload = () => handleResponse(xhr);
+
+      xhr.send();
+    };
+    
+    const handleResponse = (xhr) => {
+      const type = xhr.getResponseHeader('content-type');
+      
+      const content = document.querySelector("#content");
+	  
+	  const h1 = document.createElement('h1');
+      const p = document.createElement('p');
+      
+      if(type === 'application/json') {
+		
+        const obj = JSON.parse(xhr.response);
+        
+        console.log(JSON.parse(xhr.response));
+		
+        h1.textContent = `${obj.type}`;
+        p.textContent = `${obj.message}`; 
+        
+      }
+      else if (type === 'text/xml') {
+
+        const type = xhr.responseXML.querySelector('type').textContent;
+        const message = xhr.responseXML.querySelector('message').textContent;
+        
+        console.log(xhr.responseXML);
+		
+        h1.textContent = `${type}`;
+        p.textContent = `${message}`; 
+      }
+      
+      content.innerHTML = "";
+      
+      content.appendChild(h1);
+      content.appendChild(p);
+      
+      console.log(type);
+    };
+    
+    const init = () => {
+        console.log(type);
+        
+        const send = () => sendAjax(desiredPage.value, desiredType.value);
+        
+        button.addEventListener('click', send);
+    }
+    
+    window.onload = init;
+    
   </script>
 </head>
 <body>

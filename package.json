@@ -1,0 +1,25 @@
+{
+  "name": "http-api-assignment",
+  "version": "1.0.0",
+  "description": "API Assignment",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/server.js",
+    "test": "echo \"No Tests!\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/petarfitzpatrick/http-api-assignment.git"
+  },
+  "author": "Peter Fitzpatrick",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/petarfitzpatrick/http-api-assignment/issues"
+  },
+  "homepage": "https://github.com/petarfitzpatrick/http-api-assignment#readme",
+  "devDependencies": {
+    "eslint": "^3.15.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0"
+  }
+}
